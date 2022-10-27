@@ -1,108 +1,70 @@
-# First React App
+# Getting Started with Create React App
 
-Ensure you are in the correct directory. Your path should end in `/react-starter-files/first-react-app` e.g.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-```shell
-pwd
-/react-starter-files/first-react-app
-```
+## Available Scripts
 
-## NPM and Node.js Versions
+In the project directory, you can run:
 
-To run the `create-react-app` you’ll need to have `Node >= 14.0.0` and `npm >= 5.6` on your machine. 
+### `npm start`
 
-To check your node.js version run the following command:
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
-```shell
-node -v
-```
+The page will reload when you make changes.\
+You may also see any lint errors in the console.
 
-To check your npm version run the following command:
+### `npm test`
 
-```shell
-npm -v
-```
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-[Update to the latest stable versions of Node](https://nodejs.org/en/) if you Node version is **earlier** than **14.0.0**.
+### `npm run build`
 
-Once the code is successfully installed, you will have a simple React single page application.
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-## Create React App
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
 
-Run the following commands to create and start the react app in the current directory
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-```shell
-npx create-react-app .
-npm run start
-```
+### `npm run eject`
 
-## Task: Create React App
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-1. Open the [index.html](./public/index.html) file under the **public** folder and change the title tag to **"First Create React App Task"**.
+If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-1. Open the [App.css](./src/App.css) file under the **src** folder and change the application background colour.
+Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
 
-1. Make other cosmetic (look-and-feel only) changes to the [App.css](./src/App.css) file and review the changes in your browser
+You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
 
-1. Open [App.js](./src/App.js). Review the main function called `App()`. The return statement outputs what looks like HTML elements e.g. `<img>`, `<a>`, `<p>` tags 
+## Learn More
 
-1. Change the return statement to output new '**HTML**' elements, e.g.
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-``` HTML
-<div className="App">
-  <h1>My React Page</h1>
-  <h2>This is my first React page…</h2>
-</div>
-```
+To learn React, check out the [React documentation](https://reactjs.org/).
 
-![Example React App Homepage](./docs/first-react-app.png)
+### Code Splitting
 
-6. Create a style variable for your new `<h1>` element in [App.js](./src/App.js). <br/><br/>**For more information on styling react elements, read [the React help pages][1]**
+This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-1. Create a variable called `h1Style`. The attributes of the style object are similar to CSS class attributes but using camelCase:
+### Analyzing the Bundle Size
 
-```JavaScript
-const h1Style = { 
-  "fontSize":"30px",
-  "color": "#cc0000",
-  "textTransform": "uppercase"
-};
-```
-8. Connect the new style object to your `<h1>` element. 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-![Example React App Homepage 2](./docs/first-react-app_2.png)
+### Making a Progressive Web App
 
-[1]:(https://reactjs.org/docs/dom-elements.html#style)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-9. Open  [App.css](./src/App.css) and add a class called `.bio`.
+### Advanced Configuration
 
-1. Add a className property to the `<h2>` element in the [App.js](./src/App.js) file.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-```JavaScript
-className = "bio"
-```
+### Deployment
 
-11. Add a short paragraph of text, e.g. _This is my first react page. I created it on …_.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-## Task: Testing the Create React App
+### `npm run build` fails to minify
 
-1. Visit the page https://create-react-app.dev/docs/running-tests for more information about Jest and running tests
-
-1. Open the project in the first-react-app folder
-
-1. Replace the existing test with the following code snippet to the test file [App.test.js](\src\app.test.js)
-
-```JS
-it('renders without crashing', () => {
-  const root = ReactDOM.createRoot(document.createElement('div'));
-  root.render(<App />,root);
-});
-```
-
-3. The test script will fail with a __ReferenceError__ as the `ReactDOM` is not referenced
-
-1. Add a reference to the `ReactDOM` and run the test again. What are the results?
-
-1. Add tests to check that the `<h1>` and `<h2>` elements are render on the page
-
-1. Add a test to check that the text "__My React Page__" can be found on the page.
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
