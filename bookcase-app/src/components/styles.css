@@ -1,3 +1,8 @@
-.book-img {
-
+* {
+    font-family: Cambria,Cochin,Georgia,Times,Times New Roman,serif
 }
+.book-text > *:not(:last-child) {
+    display: block;
+    margin:0;
+    padding: 0; 
+} 
