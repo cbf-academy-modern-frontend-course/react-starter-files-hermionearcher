@@ -1,10 +1,10 @@
 import React from 'react';
 import Book from './components/Book';
-import data from './models/books.json';
+import books from './models/books.json';
 
 function App() {
-  const books = data;
-  return <Book/>;
+  
+  return books.map((book) => <Book key={book.id} book={book} />)
 }
 
 export default App;
