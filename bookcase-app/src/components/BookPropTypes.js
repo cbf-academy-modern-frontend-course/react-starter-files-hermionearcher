@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import './styles.css';
 
-function Book({ book, key }) {
+const Book = ({ book, key }) => {
   const truncate = (input) => (
     input?.length > 252 ? `${input.substring(0,250)}...` : input
   )
@@ -29,7 +30,6 @@ function Book({ book, key }) {
     padding: 0,
     marginLeft: "1vh",
     alignSelf: "center",
-    width: "100%"
   }
   const bookCoverWrapper = {
     alignSelf: "center",
@@ -47,12 +47,7 @@ function Book({ book, key }) {
     padding: "8px 10px",
     borderRadius: "5px",
     fontSize: "1.1em",
-    minWidth: "80px",
-    cursor: "pointer"
-  }
-
-  const onClick = (title) => {
-    console.log(`The book '${title} was clicked`)
+    minWidth: "80px"
   }
 
   return (
@@ -75,7 +70,7 @@ function Book({ book, key }) {
           <p>{truncate(book.volumeInfo.description)}</p>
         </div>
         <div style={bookAddButtonWrapper}>
-          <button style={bookAddButton} onClick={() => onClick(book.volumeInfo.title)}>Add +</button>
+          <button style={bookAddButton}>Add +</button>
         </div>
       </div>
 
@@ -83,5 +78,26 @@ function Book({ book, key }) {
     </>
   )
 }
+
+// Book.propTypes = {
+//   volumeInfo: PropTypes.shape({
+//     title: PropTypes.string.isRequired,
+//     authors: PropTypes.array.isRequired,
+//     description: PropTypes.string.isRequired,
+//     imageLinks: retailPrice.shape({ thumbnail: PropTypes.string.isRequired }),
+//   }),
+//   saleInfo: PropTypes.shape({
+//     retailPrice: PropTypes.shape({
+//       amount: PropTypes.string.isRequired,
+//     }),
+//   }),
+// };
+
+// Book.defaultProps = {
+//   saleInfo: {
+//     retailPrice: {amount: "No price provided",}
+//   },
+// };
+
 
 export default Book;
