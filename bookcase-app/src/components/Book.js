@@ -1,45 +1,36 @@
-import React from 'react';
-import './styles.css';
+import React from "react";
+import "./styles.css";
 
 function Book({ book, key }) {
-  const truncate = (input) => (
-    input?.length > 252 ? `${input.substring(0,250)}...` : input
-  )
-  // const {
-  //   volumeInfo: {
-  //     title,
-  //     authors,
-  //     description,
-  //     imageLinks: { thumbnail}
-  //   },
-  //   saleInfo : { retailPrice,currencyCode }
-  // } = book
+  const truncate = (input) =>
+    input?.length > 252 ? `${input.substring(0, 250)}...` : input;
+
   const bookStyle = {
     display: "flex",
     padding: "1vh",
     margin: 0,
-    borderBottom: "1px solid lightgrey"
-  }
+    borderBottom: "1px solid lightgrey",
+  };
   const bookCoverStyle = {
     // maxHeight: "100%"
-  }
+  };
   const bookTextStyle = {
     display: "flex",
     flexDirection: "column",
     padding: 0,
     marginLeft: "1vh",
     alignSelf: "center",
-    width: "100%"
-  }
+    width: "100%",
+  };
   const bookCoverWrapper = {
     alignSelf: "center",
-    width: "15vh"
-  }
+    width: "30vh",
+  };
   const bookAddButtonWrapper = {
     alignSelf: "start",
     width: "20vh",
-    paddingLeft: "1vh"
-  }
+    paddingLeft: "1vh",
+  };
   const bookAddButton = {
     backgroundColor: "#0467fc",
     color: "#fff",
@@ -48,18 +39,23 @@ function Book({ book, key }) {
     borderRadius: "5px",
     fontSize: "1.1em",
     minWidth: "80px",
-    cursor: "pointer"
-  }
+    cursor: "pointer",
+  };
 
   const onClick = (title) => {
-    console.log(`The book '${title} was clicked`)
-  }
+    console.log(`The book '${title} was clicked`);
+  };
 
   return (
     <>
       <div style={bookStyle} key={key}>
         <div style={bookCoverWrapper}>
-          <img className='book-img' style={bookCoverStyle} alt={`${book.volumeInfo.title} book cover`} src={book.volumeInfo.imageLinks.thumbnail} />
+          <img
+            className="book-img"
+            style={bookCoverStyle}
+            alt={`${book.volumeInfo.title} book cover`}
+            src={book.volumeInfo.imageLinks.thumbnail}
+          />
         </div>
         <div className="book-text" style={bookTextStyle}>
           <h2>{book.volumeInfo.title}</h2>
@@ -69,19 +65,25 @@ function Book({ book, key }) {
             <p>{book.volumeInfo.authors}</p>
           )}
 
-          {book.saleInfo.retailPrice &&
-            <p>{book.saleInfo.retailPrice.amount} <strong>{book.saleInfo.retailPrice.currencyCode}</strong></p>
-          }
+          {book.saleInfo.retailPrice && (
+            <p>
+              {book.saleInfo.retailPrice.amount}{" "}
+              <strong>{book.saleInfo.retailPrice.currencyCode}</strong>
+            </p>
+          )}
           <p>{truncate(book.volumeInfo.description)}</p>
         </div>
         <div style={bookAddButtonWrapper}>
-          <button style={bookAddButton} onClick={() => onClick(book.volumeInfo.title)}>Add +</button>
+          <button
+            style={bookAddButton}
+            onClick={() => onClick(book.volumeInfo.title)}
+          >
+            Add +
+          </button>
         </div>
       </div>
-
-
     </>
-  )
+  );
 }
 
 export default Book;
