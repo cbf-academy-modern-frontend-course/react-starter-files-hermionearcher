@@ -34,7 +34,7 @@ const ClickCounter = () => {
         <h1>Count: {clickCount}</h1>
         <p>Click the button to increment the counter</p>
         <div style={buttonWrapperStyle}>
-            <button style={clickStyle} onClick={handleClickInc}>Click#!</button>
+            <button style={clickStyle} onClick={handleClickInc}>Click!</button>
             <button style={unclickStyle} onClick={handleClickDec}>Unclick!</button>
         </div>
     </div>

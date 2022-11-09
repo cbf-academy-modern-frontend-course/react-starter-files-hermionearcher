@@ -11,6 +11,7 @@ const GadgetList = (props) => {
     <main>
       <h3>Headphones</h3>
       {props.items.map((item) => (<div key={item.title}>
+        <img src={item.src} alt={item.title} />
         <h4>{item.title}</h4>
         <h4 style={itemPriceStyle}>£{item.price}</h4>
         </div>))}
