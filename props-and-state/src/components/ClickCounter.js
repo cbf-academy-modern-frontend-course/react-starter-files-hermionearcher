@@ -7,7 +7,11 @@ const ClickCounter = () => {
         setClickCount(prevCount => prevCount + 1)
     }
     const handleClickDec = () => {
-        setClickCount(prevCount => prevCount - 1)
+        if (prevCount > 0) {
+            setClickCount(prevCount => prevCount - 1)
+        } else {
+            setClickCount(0)
+        }
     }
     const buttonWrapperStyle = {
         display: "flex"
