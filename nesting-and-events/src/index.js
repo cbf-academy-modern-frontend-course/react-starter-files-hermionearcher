@@ -12,10 +12,16 @@ const taskList = [
   { "id": "task6", "title": "Watch Bad Sisters", "isComplete": false }
 ];
 
-const sortTasks = taskList.sort()
+const getSortedElements = (sortByBool) => {
+  return taskList.filter((x) => x.isComplete === sortByBool);
+};
+
+function toggleComplete(id) {
+  console.log(`Task with the id '${id}' was clicked`);
+}
 
 function App() {
-
+  let taskList = getSortedElements(false).concat(getSortedElements(true));
   return (
     <Fragment>
       <h1 key="heading">Task List</h1>
@@ -23,7 +29,7 @@ function App() {
         {/* Task: Nesting Components - Add you tasks here: */}
         {taskList.map((task, i) => {
           return (
-            <Task key={i} id={task.id} title={task.title} isComplete={task.isComplete} />
+            <Task key={i} id={task.id} title={task.title} isComplete={task.isComplete} toggleComplete={toggleComplete} />
           )
         })}
       </TaskContainer>
