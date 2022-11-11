@@ -1,14 +1,17 @@
 import React from 'react';
-import Book from './components/Book';
+import BookList from './components/BookList';
 import Header from './components/Header';
-import books from './models/books.json';
+import books from './models/books.json'
+
+const addTitle = (title) => {
+  console.log(`The book '${title}' was clicked`);
+};
 
 function App() {
-  
   return (
     <>
     <Header />
-    {books.map((book) => <Book key={book.id} book={book} />)}
+    <BookList books={books} addTitle={addTitle} />
     </>
     )
 }
