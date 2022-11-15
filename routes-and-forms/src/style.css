@@ -1,0 +1,17 @@
+.form--wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.form--wrapper input {
+    border-radius: 0;
+    width: 50vh
+}
+
+.form--wrapper label {
+    font-size: medium
+}
+
+.results--wrapper {
+    font-size: medium
+}
