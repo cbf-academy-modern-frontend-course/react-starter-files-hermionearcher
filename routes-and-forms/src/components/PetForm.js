@@ -33,7 +33,7 @@ const PetForm = () => {
             <label>
               Pet's Age:
               <input
-                type="text"
+                type="number"
                 value={age}
                 onChange={(e) => {
                   setAge(e.target.value);
