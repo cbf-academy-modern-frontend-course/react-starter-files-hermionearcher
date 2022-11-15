@@ -9,15 +9,19 @@ import PetForm from "./components/PetForm";
 import AboutUs from "./components/AboutUs";
 
 export default function App() {
+  const linkStyle = {
+    textDecoration: 'none',
+    color: "black"
+  }
   return (
     <Router>
       <ul className="breadcrumb">
-        <li><Link to="/"> All Pets </Link></li>
-        <li><Link to="/kittens"> Kittens </Link></li>
-        <li><Link to="/puppies"> Puppies </Link></li>
-        <li><Link to="/ducklings"> Ducklings </Link></li>
-        <li><Link to="/register"> Register your Pet </Link></li>
-        <li><Link to="/aboutus"> About us </Link></li>
+        <li><Link style={linkStyle} to="/aboutus"> About us </Link></li>
+        <li><Link style={linkStyle} to="/register"> Register your Pet </Link></li>
+        <li><Link style={linkStyle} to="/"> All Pets </Link></li>
+        <li><Link style={linkStyle} to="/kittens"> Kittens </Link></li>
+        <li><Link style={linkStyle} to="/puppies"> Puppies </Link></li>
+        <li><Link style={linkStyle} to="/ducklings"> Ducklings </Link></li>
       </ul>
       <Routes>
         <Route path="/" element={<Home />} />

@@ -5,11 +5,27 @@
 
 .form--wrapper input {
     border-radius: 0;
-    width: 50vh
+    width: 50vh;
 }
 
 .form--wrapper label {
+    margin: 2vh;
     font-size: medium
+}
+
+.register--wrapper {
+    /* width: 60vh; */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.register--border {
+    border: solid 1px grey;
+    border-radius: 2vh;
+    box-shadow: 0 0 10px grey;
+    padding: 0 3vh;
 }
 
 .results--wrapper {

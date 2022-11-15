@@ -4,15 +4,36 @@ body{
   font-family: 'Poppins', sans-serif;
   font-size:1.5em;
   text-align: center;
+  margin: 0;
+}
+html{
+  margin: 0;
+  padding: 0;
 }
 
+/* .breadcrumb {
+  border-bottom: 1px solid lightgray;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
 ul.breadcrumb {
   list-style: none;
+  text-decoration: none;
 }
 
 ul.breadcrumb li {
   padding:0px 15px;
+  text-decoration: none;
+  margin: 2vh;
+  border-radius: 8px;
   display:inline-block;
+  border: solid grey 1px;
+}
+ul.breadcrumb li:hover {
+background-color: grey;
+color: white;
 }
 
 input[type=text]  {
