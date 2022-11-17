@@ -1,20 +1,19 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import './styles.css';
+import React from "react";
+import PropTypes from "prop-types";
+import "./styles.css";
 
 const BookPropTypes = ({ book, key, addTitle }) => {
-  const truncate = (input) => (
-    input?.length > 252 ? `${input.substring(0, 250)}...` : input
-  )
+  const truncate = (input) =>
+    input?.length > 252 ? `${input.substring(0, 250)}...` : input;
   const {
     volumeInfo: {
       title,
       authors,
       description,
-      imageLinks: { smallThumbnail }
+      imageLinks: { thumbnail },
     },
-    saleInfo: { retailPrice }
-  } = book
+    saleInfo: { retailPrice },
+  } = book;
   const bookStyle = {
     display: "flex",
     padding: "1vh",
@@ -56,7 +55,12 @@ const BookPropTypes = ({ book, key, addTitle }) => {
     <>
       <div style={bookStyle} key={key}>
         <div style={bookCoverWrapper}>
-          <img className="book-img" style={bookCoverStyle} alt={`${title} book cover`} src={smallThumbnail} />
+          <img
+            className="book-img"
+            style={bookCoverStyle}
+            alt={`${title} book cover`}
+            src={thumbnail}
+          />
         </div>
         <div className="book-text" style={bookTextStyle}>
           <h2>{title}</h2>
@@ -67,29 +71,28 @@ const BookPropTypes = ({ book, key, addTitle }) => {
           )}
 
           {retailPrice && (
-            <p>{retailPrice.amount}{" "}<strong>{retailPrice.currencyCode}</strong></p>
+            <p>
+              {retailPrice.amount} <strong>{retailPrice.currencyCode}</strong>
+            </p>
           )}
           <p>{truncate(description)}</p>
         </div>
         <div style={bookAddButtonWrapper}>
-          <button
-            style={bookAddButton}
-            onClick={() => addTitle(title)}
-          >
+          <button style={bookAddButton} onClick={() => addTitle(title)}>
             Add +
           </button>
         </div>
       </div>
     </>
   );
-}
+};
 
 BookPropTypes.propTypes = {
   volumeInfo: PropTypes.shape({
     title: PropTypes.string.isRequired,
     authors: PropTypes.array.isRequired,
     description: PropTypes.string.isRequired,
-    imageLinks: PropTypes.shape({ smallThumbnail: PropTypes.string.isRequired }),
+    imageLinks: PropTypes.shape({ thumbnail: PropTypes.string.isRequired }),
   }),
   saleInfo: PropTypes.shape({
     retailPrice: PropTypes.shape({
@@ -100,9 +103,8 @@ BookPropTypes.propTypes = {
 
 BookPropTypes.defaultProps = {
   saleInfo: {
-    retailPrice: { amount: "No price provided", }
+    retailPrice: { amount: "No price provided" },
   },
 };
-
 
 export default BookPropTypes;
