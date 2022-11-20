@@ -1,6 +1,62 @@
 import React from "react";
 import PropTypes from "prop-types";
-import "./styles.css";
+import styled from "styled-components";
+
+const BookItem = styled.div`
+  display: flex;
+  margin: 0;
+  border-bottom: 1px solid lightgrey;
+  align-items: center;
+  // width: 97%;
+  text-align: left;
+  height: 100%;
+  @media (max-width: 700px) {
+    flex-direction: column;
+    // justify-content: center;
+  }
+`;
+const BookCover = styled.div`
+  align-self: center;
+  @media (max-width: 700px) {
+    justify-content: flex-start;
+    top: 0;
+  }
+`;
+const BookText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+
+  &:not(:last-child) {
+    display: block;
+    padding: 0 1vh 0 1vh;
+    margin: 0;
+    width: 100%;
+  }
+`;
+const BookButtonWrapper = styled.div`
+  align-self: start;
+  width: 20vh;
+  padding: 1vh 0 1vh 0;
+  
+  @media (max-width: 700px) {
+    width: 100%;
+  }
+`;
+const BookButton = styled.button`
+  background-color: #0467fc;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  min-width: 80px;
+  cursor: pointer;
+  
+  @media (max-width: 700px) {
+    width: 100%;  
+  }
+`;
 
 const BookPropTypes = ({ book, key, addTitle }) => {
   const truncate = (input) =>
@@ -14,76 +70,27 @@ const BookPropTypes = ({ book, key, addTitle }) => {
     },
     saleInfo: { retailPrice },
   } = book;
-  const bookStyle = {
-    display: "flex",
-    padding: "1vh",
-    margin: 0,
-    borderBottom: "1px solid lightgrey",
-  };
-  const bookCoverStyle = {
-    // maxHeight: "100%"
-  };
-  const bookTextStyle = {
-    display: "flex",
-    flexDirection: "column",
-    padding: 0,
-    marginLeft: "1vh",
-    alignSelf: "center",
-    width: "100%",
-  };
-  const bookCoverWrapper = {
-    alignSelf: "center",
-    width: "30vh",
-  };
-  const bookAddButtonWrapper = {
-    alignSelf: "start",
-    width: "20vh",
-    paddingLeft: "1vh",
-  };
-  const bookAddButton = {
-    backgroundColor: "#0467fc",
-    color: "#fff",
-    border: "none",
-    padding: "8px 10px",
-    borderRadius: "5px",
-    fontSize: "1.1em",
-    minWidth: "80px",
-    cursor: "pointer",
-  };
 
   return (
-    <>
-      <div style={bookStyle} key={key}>
-        <div style={bookCoverWrapper}>
-          <img
-            className="book-img"
-            style={bookCoverStyle}
-            alt={`${title} book cover`}
-            src={thumbnail}
-          />
-        </div>
-        <div className="book-text" style={bookTextStyle}>
-          <h2>{title}</h2>
-          {authors.length > 1 ? (
-            <p>{authors.join(" and ")}</p>
-          ) : (
-            <p>{authors}</p>
-          )}
+    <BookItem key={key}>
+      <BookCover>
+        <img className="book-img" alt={`${title} book cover`} src={thumbnail} />
+      </BookCover>
+      <BookText>
+        <h2>{title}</h2>
+        {authors.length > 1 ? <p>{authors.join(" and ")}</p> : <p>{authors}</p>}
 
-          {retailPrice && (
-            <p>
-              {retailPrice.amount} <strong>{retailPrice.currencyCode}</strong>
-            </p>
-          )}
-          <p>{truncate(description)}</p>
-        </div>
-        <div style={bookAddButtonWrapper}>
-          <button style={bookAddButton} onClick={() => addTitle(title)}>
-            Add +
-          </button>
-        </div>
-      </div>
-    </>
+        {retailPrice && (
+          <p>
+            {retailPrice.amount} <strong>{retailPrice.currencyCode}</strong>
+          </p>
+        )}
+        <p>{truncate(description)}</p>
+      </BookText>
+      <BookButtonWrapper>
+        <BookButton onClick={() => addTitle(title)}>Add +</BookButton>
+      </BookButtonWrapper>
+    </BookItem>
   );
 };
 

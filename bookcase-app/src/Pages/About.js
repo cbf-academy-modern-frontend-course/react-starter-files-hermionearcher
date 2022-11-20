@@ -1,9 +1,17 @@
 import React from 'react'
+import styled from 'styled-components';
 
 const About = () => {
   return (
-    <div>About</div>
+    <StyledLanding>About</StyledLanding>
   )
 }
+
+export const StyledLanding = styled.h1`
+  height: 85vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`
 
 export default About

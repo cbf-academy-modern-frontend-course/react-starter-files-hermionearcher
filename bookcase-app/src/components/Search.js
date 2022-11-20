@@ -1,65 +1,62 @@
-import React, { useState } from "react";
+import React from "react";
+import styled from "styled-components";
 
-const searchRowStyle = {
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  width: "100%",
-  gap: 10,
-  height: "3vh",
-};
-const searchInputStyle = {
-  width: "60%",
-  height: "2vh",
+export const SearchBarWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  // align-items: center;
+  text-align: center;
+  width: 100%;
+  margin-left: 3vh;    
+`;
+export const SearchFromButton = styled.input`
+  align-items: center;
+  background-color: #0467fc;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.1em;
+  min-width: 80px;
+  cursor: pointer;
+  height: 30px;
+  margin: 10px
+`;
+export const SearchBarForm = styled.form`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  gap: 10;
+`;
+export const SearchInput = styled.input`
+  width: 100%;
+  height: 20px;
+`
 
-  // alignSelf: "center",
-};
-const searchFromButton = {
-  height: "2.5vh",
-  // alignSelf: "center",
-};
-const searchFormStyle = {
-  display: "flex",
-  flexDirection: "row",
-  justifyContent: "center",
-  width: "100%",
-  gap: 10,
-};
-
-const Search = ({findBooks}) => {
-  const [keyword, setKeyword] = useState("");
-  
-
+const Search = ({ findBooks, keyword, setKeyword }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
-    findBooks(keyword)
-    console.log(keyword)
+    findBooks(keyword);
   };
 
   return (
-    <div style={searchRowStyle}>
-      <form onSubmit={handleSubmit} style={searchFormStyle}>
-        <p style={{ color: "red" }}>
-          <em> {keyword && "Keywords Typed: " + keyword} </em>
-        </p>
-        <label>
-          Keyword:
-          <input
-            style={searchInputStyle}
-            type="text"
-            id="name"
-            name="search"
-            value={findBooks.keyword}
-            placeholder="Enter name, author, keyword or genre..."
-            onChange={(e) => setKeyword(e.target.value)}
-            required
-          />
-          <br />
-          <br />
-        </label>
-        <input style={searchFromButton} type="submit" value="Find" />
-      </form>
-    </div>
+    <SearchBarWrapper>
+      <SearchBarForm onSubmit={handleSubmit}>
+        <SearchInput
+          type="text"
+          id="name"
+          name="search"
+          value={findBooks.keyword}
+          placeholder="Enter name, author, keyword or genre..."
+          onChange={(e) => setKeyword(e.target.value)}
+          required
+        />
+        <SearchFromButton type="submit" value="Find" />
+      </SearchBarForm>
+    </SearchBarWrapper>
   );
 };
 
