@@ -4,15 +4,20 @@ import styled from "styled-components";
 
 const BookItem = styled.div`
   display: flex;
+  width: calc(100% - 30px);
   margin: 0;
   border-bottom: 1px solid lightgrey;
   align-items: center;
   // width: 97%;
   text-align: left;
   height: 100%;
+
   @media (max-width: 700px) {
     flex-direction: column;
-    // justify-content: center;
+    width:100%;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 5px;
   }
 `;
 const BookCover = styled.div`
@@ -26,7 +31,7 @@ const BookText = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0;
-
+  width: 100%;
   &:not(:last-child) {
     display: block;
     padding: 0 1vh 0 1vh;
@@ -36,11 +41,13 @@ const BookText = styled.div`
 `;
 const BookButtonWrapper = styled.div`
   align-self: start;
-  width: 20vh;
+  width: 90px;
   padding: 1vh 0 1vh 0;
-  
+
   @media (max-width: 700px) {
     width: 100%;
+    padding: 0;
+    margin: 0;
   }
 `;
 const BookButton = styled.button`
@@ -52,13 +59,15 @@ const BookButton = styled.button`
   font-size: 1.1em;
   min-width: 80px;
   cursor: pointer;
-  
+
+
   @media (max-width: 700px) {
-    width: 100%;  
+    width: 90%;  
+    margin: 0;
   }
 `;
 
-const BookPropTypes = ({ book, key, addTitle }) => {
+const BookPropTypes = ({ book, addTitle }) => {
   const truncate = (input) =>
     input?.length > 252 ? `${input.substring(0, 250)}...` : input;
   const {
@@ -72,7 +81,7 @@ const BookPropTypes = ({ book, key, addTitle }) => {
   } = book;
 
   return (
-    <BookItem key={key}>
+    <BookItem key={book.id}>
       <BookCover>
         <img className="book-img" alt={`${title} book cover`} src={thumbnail} />
       </BookCover>

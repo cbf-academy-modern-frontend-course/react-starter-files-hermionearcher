@@ -3,7 +3,7 @@ import BookPropTypes from './BookPropTypes'
 
 const BookList = (props) => {
   return (
-    props.books.map((book) => <BookPropTypes key={book.id} book={book} addTitle={props.addTitle} />)
+    props.books.map((book) => <BookPropTypes book={book} addTitle={props.addTitle} />)
 )
 }
 

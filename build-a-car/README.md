@@ -42,13 +42,13 @@ import React from 'react'
 
 export default function App() {
   return (
-    <div className="app">
+    <h1 className="app">
 		 <Car/>
 		 <Bicycle/>
 		 <Truck/>
 		 <Bus/>
 		 <Skateboard/>
-    </div>
+    </h1>
   );
 }
 ```
@@ -64,9 +64,9 @@ import Car from "./Car";
 
 export default function App() {
   return (
-    <div className="App">
+    <h1 className="App">
       <Car numberOfWheels="4"/>
-    </div>
+    </h1>
   );
 }
 
