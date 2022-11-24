@@ -52,6 +52,10 @@ const CloseStyle = {
   height: "100%"
 }
 
+const onClick = () => {
+  console.log("Button Click")
+}
+
 const Search = ({ findBooks, keyword, setKeyword }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -74,7 +78,7 @@ const Search = ({ findBooks, keyword, setKeyword }) => {
           required
         />
         <GrClose style={CloseStyle} onClick={closeClick}/>
-        <SearchFromButton type="submit" value="Find">Find</SearchFromButton>
+        <SearchFromButton type="submit" onClick={onClick} value="Find">Find</SearchFromButton>
       </SearchBarForm>
     </SearchBarWrapper>
   );
