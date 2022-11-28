@@ -4,21 +4,23 @@ import NavPages from "./NavPages";
 import { useLocation } from "react-router-dom";
 import PageTitle from "./PageTitle";
 import styled from "styled-components";
+import Navbar from "./Navbar";
 
-const Header = ({ keyword, setKeyword }) => {
+const Header = ({ quantity, setQuantity, keyword, setKeyword }) => {
   const location = useLocation();
   let currentUrl = location.pathname;
 
   return (
     <>
-      <HeaderWrapper component={"div"}>
+    <Navbar quantity={quantity} setQuantity={setQuantity} />
+        {(currentUrl === "/Bookcase" || currentUrl === "/bookcase") && (
+        <Search keyword={keyword} setKeyword={setKeyword} value={keyword} />
+        )}
+      {/* <HeaderWrapper component={"div"}>
         <PageTitle text={"My e-Book Library"} />
         <NavPages />
-        {(currentUrl === "/Bookcase" || currentUrl === "/bookcase") && (
-          <Search keyword={keyword} setKeyword={setKeyword} value={keyword} />
-        )}
-        {/* <h2>Basket Total: £0.00</h2 <NavigationButtons /> */}
-      </HeaderWrapper>
+        <h2>Basket Total: £0.00</h2 <NavigationButtons />
+      </HeaderWrapper> */}
       {keyword && (
         <Keyword>
           <p style={keywordStyle}>

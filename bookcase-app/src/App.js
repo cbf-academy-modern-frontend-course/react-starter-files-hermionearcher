@@ -16,6 +16,8 @@ const addTitle = (title) => {
 function App() {
   const [keyword, setKeyword] = useState("");
   const [books, setBooks] = useState(data);
+  const [quantity, setQuantity] = useState(0);
+  const [bookBasket, setBookBasket] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -51,17 +53,16 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
-      <Header keyword={keyword} setKeyword={setKeyword} />
+      <Header quantity={quantity} setQuantity={setQuantity} keyword={keyword} setKeyword={setKeyword} />
       <div>
         <Routes>
           <Route exact path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route
             path="/bookcase"
-            element={<BookList books={books} addTitle={addTitle} />}
+            element={<BookList bookBasket={bookBasket} setBookBasket={setBookBasket} books={books} addTitle={addTitle} quantity={quantity} setQuantity={setQuantity} />}
           />
-          <Route path="/basket" element={<Basket />} />
+          <Route path="/basket" element={<Basket books={books} bookBasket={bookBasket} setBookBasket={setBookBasket} quantity={quantity} setQuantity={setQuantity} />} />
         </Routes>
       </div>
     </Router>

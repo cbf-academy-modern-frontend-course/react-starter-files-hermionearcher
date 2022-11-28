@@ -3,24 +3,31 @@ import styled from "styled-components";
 import errorImg from "../../models/error-book-cover.jpg";
 import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 
-function Book({ book, addTitle }) {
-  const [quantity, setQuantity] = useState(4);
+function Book({ bookBasket, setBookBasket, book, addTitle, quantity, setQuantity }) {
+  
+
   const truncate = (input) =>
     input?.length > 252 ? `${input.substring(0, 250)}...` : input;
 
   const onClick = (title) => {
     console.log(`The book '${title} was clicked`);
   };
-  const removeFromCart = () => {};
-  const increaseCartQuantity = () => {};
-  const decreaseCartQuantity = () => {};
-  let id = 0;
-
+  const removeFromCart = () => {
+    setQuantity(quantity - 1);
+    setBookBasket(bookBasket.filter(function(item) {
+      return item !== book
+    }))
+  };
+  const addToCart = () => {
+    setQuantity(quantity + 1);
+    setBookBasket((bookBasket) => [...bookBasket, book]);
+  };
+  console.log("id", bookBasket);
   const {
     volumeInfo: { title, authors, description },
     saleInfo: { retailPrice },
   } = book;
-  console.log(book);
+  // console.log(book);
   return (
     <>
       <BookItem component={"div"} key={book.id}>
@@ -64,36 +71,15 @@ function Book({ book, addTitle }) {
           <p>{truncate(description)}</p>
         </BookText>
 
-        {quantity === 0 ? (
-          <BookButtonWrapper component={"div"}>
-            <BookButton component={"button"} onClick={() => addTitle(title)}>
-              Add +
-            </BookButton>
-          </BookButtonWrapper>
-        ) : (
-          <div
-            className="d-flex align-items-center flex-column"
-            style={{ gap: ".5rem" }}
-          >
-            <div
-              className="d-flex align-items-center justify-content-center"
-              style={{ gap: ".5rem" }}
-            >
-              <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
-              <div>
-                <span className="fs-3">{quantity}</span>
-              </div>
-              <Button onClick={() => increaseCartQuantity(id)}>+</Button>
-            </div>
-            <Button
-              onClick={() => removeFromCart(id)}
-              variant="danger"
-              size="sm"
-            >
-              Remove
-            </Button>
-          </div>
-        )}
+        {!bookBasket.includes(book) ? (
+          <Button onClick={() => addToCart()} size="sm">
+            Add+
+          </Button>
+        ) : quantity > 0 && bookBasket.includes(book) ? (
+          <Button onClick={() => removeFromCart()} variant="danger" size="sm">
+            Remove
+          </Button>
+        ) : null}
       </BookItem>
     </>
   );

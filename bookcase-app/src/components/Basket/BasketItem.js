@@ -3,24 +3,35 @@ import styled from "styled-components";
 import { GrClose } from "react-icons/gr";
 import image from "../../models/error-book-cover.jpg";
 
-const BasketItem = () => {
+const BasketItem = ({ setQuantity, quantity, setBookBasket, bookBasket, books }) => {
+  console.log("basket",bookBasket);
+  const removeFromCart = (id) => {
+    setBookBasket(bookBasket => bookBasket.filter(item => {
+      return item !== id
+    }))
+    setQuantity(quantity - 1);
+    console.log(bookBasket)
+  };
   return (
-    <Basket>
-      <img src={image} alt="book" />
-      <div>
-        <p>Title</p>
-        <p>Author</p>
-      </div>
-      <BasketQty>
-        <p>2</p>
-        <div>
-          <p>+</p>
-          <p>-</p>
-        </div>
-      </BasketQty>
-      <p>£200</p>
-      <GrClose />
-    </Basket>
+    <>
+      {bookBasket
+      .map((book, i) => (
+        <>
+          <Basket key={i}>
+            <img src={book.volumeInfo.imageLinks.thumbnail} alt="book" />
+            <div>
+              <p>{book.volumeInfo.title}</p>
+              <p>{book.volumeInfo.author}</p>
+            </div>
+            <BasketQty>
+              <p>1</p>
+            </BasketQty>
+            {/* <p>{book.saleInfo.retailPrice.amount !== undefined ? book.saleInfo.retailPrice.amount : null} <strong>{book.saleInfo.retailPrice.currencyCode}</strong></p> */}
+            <GrClose style={{cursor: "pointer"}} onClick={() => removeFromCart(book.id)}/>
+          </Basket>
+        </>
+      ))}
+    </>
   );
 };
 
@@ -41,7 +52,6 @@ const Basket = styled.div`
 //     padding-bottom: 5px;
 //   }
 `;
-
 
 const BasketQty = styled.div`
   display: flex;
