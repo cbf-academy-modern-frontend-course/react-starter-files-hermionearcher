@@ -1,6 +1,40 @@
 import React from "react";
 import styled from "styled-components";
-import { GrClose } from 'react-icons/gr';
+import { GrClose } from "react-icons/gr";
+import axios from "axios";
+
+const onClick = () => {
+  console.log("Button Click");
+};
+
+const Search = ({ keyword, setKeyword }) => {
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+  const closeClick = () => {
+    setKeyword("");
+  };
+
+  return (
+    <SearchBarWrapper>
+      <SearchBarForm onSubmit={handleSubmit}>
+        <SearchInput
+          type="text"
+          id="name"
+          name="search"
+          value={keyword}
+          placeholder="Enter name, author, keyword or genre..."
+          onChange={(e) => setKeyword(e.target.value)}
+          required
+        />
+        <GrClose style={CloseStyle} onClick={closeClick} />
+        {/* <SearchFromButton type="submit" onClick={onClick} value="Find">Find</SearchFromButton> */}
+      </SearchBarForm>
+    </SearchBarWrapper>
+  );
+};
+
+export default Search;
 
 const SearchBarWrapper = styled.div`
   display: flex;
@@ -9,7 +43,7 @@ const SearchBarWrapper = styled.div`
   // align-items: center;
   text-align: center;
   width: 100%;
-  margin-left: 3vh;    
+  margin-left: 3vh;
 `;
 const SearchFromButton = styled.button`
   align-items: center;
@@ -44,44 +78,10 @@ const SearchInput = styled.input`
   border: solid 1px grey;
   border-radius: 5px;
   margin: 0;
-  padding-right: 20px
-`
+  padding-right: 20px;
+`;
 const CloseStyle = {
   cursor: "pointer",
   marginLeft: "-18px",
-  height: "100%"
-}
-
-const onClick = () => {
-  console.log("Button Click")
-}
-
-const Search = ({ findBooks, keyword, setKeyword }) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    findBooks(keyword);
-  };
-  const closeClick = () => {
-    setKeyword("")
-  }
-
-  return (
-    <SearchBarWrapper>
-      <SearchBarForm onSubmit={handleSubmit}>
-        <SearchInput
-          type="text"
-          id="name"
-          name="search"
-          value={keyword}
-          placeholder="Enter name, author, keyword or genre..."
-          onChange={(e) => setKeyword(e.target.value)}
-          required
-        />
-        <GrClose style={CloseStyle} onClick={closeClick}/>
-        <SearchFromButton type="submit" onClick={onClick} value="Find">Find</SearchFromButton>
-      </SearchBarForm>
-    </SearchBarWrapper>
-  );
+  height: "100%",
 };
-
-export default Search;

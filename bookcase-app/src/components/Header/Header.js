@@ -1,19 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Search from "../Search";
 import NavPages from "./NavPages";
 import { useLocation } from "react-router-dom";
 import PageTitle from "./PageTitle";
 import styled from "styled-components";
 
-const url = (value) =>
-  `https://www.googleapis.com/books/v1/volumes?q=${value}&filter=paid-ebooks&print-type=books&projection=lite`;
+const Header = ({ keyword, setKeyword }) => {
+  const location = useLocation();
+  let currentUrl = location.pathname;
 
-const findBooks = async (value) => {
-  const results = await fetch(url).then((res) => res.json());
-  if (!results.error) {
-  }
-  console.log(value);
+  return (
+    <>
+      <HeaderWrapper component={"div"}>
+        <PageTitle text={"My e-Book Library"} />
+        <NavPages />
+        {(currentUrl === "/Bookcase" || currentUrl === "/bookcase") && (
+          <Search keyword={keyword} setKeyword={setKeyword} value={keyword} />
+        )}
+        {/* <h2>Basket Total: £0.00</h2 <NavigationButtons /> */}
+      </HeaderWrapper>
+      {keyword && (
+        <Keyword>
+          <p style={keywordStyle}>
+            <strong>Keywords Typed: </strong>
+            {keyword}
+          </p>
+        </Keyword>
+      )}
+    </>
+  );
 };
+
+export default Header;
 
 const HeaderWrapper = styled.div`
   display: flex;
@@ -28,12 +46,12 @@ const HeaderWrapper = styled.div`
   position: sticky;
   top: 0;
 
-  @media (max-width: 700px) {
+  @media (max-width: 1026px) {
     flex-direction: column;
     // justify-content: center;
   }
 `;
-const Keyword = styled.h3`
+const Keyword = styled.div`
   display: flex;
   align-items: center;
   text-align: center;
@@ -46,32 +64,3 @@ const keywordStyle = {
   inlineSize: "100vh",
   overflowWrap: "break-word",
 };
-const Header = () => {
-  const [keyword, setKeyword] = useState("");
-  const location = useLocation();
-  let currentUrl = location.pathname;
-
-  return (
-    <>
-      <HeaderWrapper>
-        <PageTitle text={"My e-Book Library"} />
-        <NavPages />
-        {currentUrl === "/Bookcase" && 
-          <Search
-            findBooks={findBooks}
-            keyword={keyword}
-            setKeyword={setKeyword}
-          />
-        }
-        {/* <h2>Basket Total: £0.00</h2 <NavigationButtons /> */}
-      </HeaderWrapper>
-      {keyword && (
-        <Keyword>
-          Keywords Typed: <p style={keywordStyle}>{keyword}</p>
-        </Keyword>
-      )}
-    </>
-  );
-};
-
-export default Header;

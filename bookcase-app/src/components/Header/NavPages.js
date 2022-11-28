@@ -6,6 +6,7 @@ let pages = {
   home: "Home",
   about: "About",
   bookcase: "Bookcase",
+  basket: "Basket"
 };
 
 const NavWrapper = styled.nav`
@@ -14,10 +15,19 @@ const NavWrapper = styled.nav`
   justify-content: flex-start;
   // width: 50vh;
   padding: 2vh
+  @media (max-width: 460px) {
+    flex-direction: column;
+    // justify-content: center;
+  }
 `;
 
 const NavItem = styled.div`
   padding: 1vh;
+  flex-direction: row;
+  @media (max-width: 460px) {
+    flex-direction: column;
+    // justify-content: center;
+  }
 `;
 
 const NavPages = () => {

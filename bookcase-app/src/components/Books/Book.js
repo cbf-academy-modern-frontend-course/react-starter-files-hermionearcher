@@ -1,89 +1,166 @@
-import React from "react";
-import "./styles.css";
+import React, { useState } from "react";
+import styled from "styled-components";
+import errorImg from "../../models/error-book-cover.jpg";
+import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 
-function Book({ book, key }) {
+function Book({ book, addTitle }) {
+  const [quantity, setQuantity] = useState(4);
   const truncate = (input) =>
     input?.length > 252 ? `${input.substring(0, 250)}...` : input;
-
-  const bookStyle = {
-    display: "flex",
-    padding: "1vh",
-    margin: 0,
-    borderBottom: "1px solid lightgrey",
-  };
-  const bookCoverStyle = {
-    // maxHeight: "100%"
-  };
-  const bookTextStyle = {
-    display: "flex",
-    flexDirection: "column",
-    padding: 0,
-    marginLeft: "1vh",
-    alignSelf: "center",
-    width: "100%",
-  };
-  const bookCoverWrapper = {
-    alignSelf: "center",
-    width: "30vh",
-  };
-  const bookAddButtonWrapper = {
-    alignSelf: "start",
-    width: "20vh",
-    paddingLeft: "1vh",
-  };
-  const bookAddButton = {
-    backgroundColor: "#0467fc",
-    color: "#fff",
-    border: "none",
-    padding: "8px 10px",
-    borderRadius: "5px",
-    fontSize: "1.1em",
-    minWidth: "80px",
-    cursor: "pointer",
-  };
 
   const onClick = (title) => {
     console.log(`The book '${title} was clicked`);
   };
+  const removeFromCart = () => {};
+  const increaseCartQuantity = () => {};
+  const decreaseCartQuantity = () => {};
+  let id = 0;
 
+  const {
+    volumeInfo: { title, authors, description },
+    saleInfo: { retailPrice },
+  } = book;
+  console.log(book);
   return (
     <>
-      <div style={bookStyle} key={key}>
-        <div style={bookCoverWrapper}>
-          <img
-            className="book-img"
-            style={bookCoverStyle}
-            alt={`${book.volumeInfo.title} book cover`}
-            src={book.volumeInfo.imageLinks.thumbnail}
-          />
-        </div>
-        <div className="book-text" style={bookTextStyle}>
-          <h2>{book.volumeInfo.title}</h2>
-          {book.volumeInfo.authors.length > 1 ? (
-            <p>{book.volumeInfo.authors.join(" and ")}</p>
+      <BookItem component={"div"} key={book.id}>
+        <BookCover component={"div"}>
+          {(typeof book.volumeInfo.imageLinks.thumbnail === "undefined" ||
+            book.volumeInfo.imageLinks.thumbnail === undefined) &&
+          (typeof book.volumeInfo.imageLinks.smallThumbnail === "undefined" ||
+            book.volumeInfo.imageLinks.smallThumbnail === undefined) ? (
+            <img
+              className="book-img"
+              alt={`${title} book cover`}
+              src={errorImg}
+            />
+          ) : book.volumeInfo.imageLinks.thumbnail === undefined ? (
+            <img
+              className="book-img"
+              alt={`${title} book cover`}
+              src={book.volumeInfo.imageLinks.smallThumbnail}
+            />
           ) : (
-            <p>{book.volumeInfo.authors}</p>
+            <img
+              className="book-img"
+              alt={`${title} book cover`}
+              src={book.volumeInfo.imageLinks.thumbnail}
+            />
+          )}
+        </BookCover>
+        <BookText component={"div"}>
+          <h2>{title}</h2>
+          {authors && authors.length > 1 ? (
+            <p>{authors.join(" and ")}</p>
+          ) : (
+            <p>{authors}</p>
           )}
 
-          {book.saleInfo.retailPrice && (
+          {retailPrice && (
             <p>
-              {book.saleInfo.retailPrice.amount}{" "}
-              <strong>{book.saleInfo.retailPrice.currencyCode}</strong>
+              {retailPrice.amount} <strong>{retailPrice.currencyCode}</strong>
             </p>
           )}
-          <p>{truncate(book.volumeInfo.description)}</p>
-        </div>
-        <div style={bookAddButtonWrapper}>
-          <button
-            style={bookAddButton}
-            onClick={() => onClick(book.volumeInfo.title)}
+          <p>{truncate(description)}</p>
+        </BookText>
+
+        {quantity === 0 ? (
+          <BookButtonWrapper component={"div"}>
+            <BookButton component={"button"} onClick={() => addTitle(title)}>
+              Add +
+            </BookButton>
+          </BookButtonWrapper>
+        ) : (
+          <div
+            className="d-flex align-items-center flex-column"
+            style={{ gap: ".5rem" }}
           >
-            Add +
-          </button>
-        </div>
-      </div>
+            <div
+              className="d-flex align-items-center justify-content-center"
+              style={{ gap: ".5rem" }}
+            >
+              <Button onClick={() => decreaseCartQuantity(id)}>-</Button>
+              <div>
+                <span className="fs-3">{quantity}</span>
+              </div>
+              <Button onClick={() => increaseCartQuantity(id)}>+</Button>
+            </div>
+            <Button
+              onClick={() => removeFromCart(id)}
+              variant="danger"
+              size="sm"
+            >
+              Remove
+            </Button>
+          </div>
+        )}
+      </BookItem>
     </>
   );
 }
 
 export default Book;
+
+const BookItem = styled.div`
+  display: flex;
+  width: calc(100% - 30px);
+  margin: 0;
+  border-bottom: 1px solid lightgrey;
+  align-items: center;
+  // width: 97%;
+  text-align: left;
+  height: 100%;
+
+  @media (max-width: 700px) {
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    padding-bottom: 5px;
+  }
+`;
+const BookCover = styled.div`
+  align-self: center;
+  @media (max-width: 700px) {
+    justify-content: flex-start;
+    top: 0;
+  }
+`;
+const BookText = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  width: 100%;
+  &:not(:last-child) {
+    display: block;
+    padding: 0 1vh 0 1vh;
+    margin: 0;
+    width: 100%;
+  }
+`;
+const BookButtonWrapper = styled.div`
+  align-self: start;
+  width: 90px;
+  padding: 1vh 0 1vh 0;
+
+  @media (max-width: 700px) {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+`;
+const BookButton = styled.button`
+  background-color: #0467fc;
+  color: #fff;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 5px;
+  font-size: 1.1em;
+  min-width: 80px;
+  cursor: pointer;
+
+  @media (max-width: 700px) {
+    width: 90%;
+    margin: 0;
+  }
+`;
