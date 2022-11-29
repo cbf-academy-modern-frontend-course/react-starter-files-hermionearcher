@@ -1,32 +1,29 @@
 import React from "react";
 import { Button, Container, Nav, Navbar as NavbarBs } from "react-bootstrap";
 import { NavLink } from "react-router-dom";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
-
-const Navbar = ({ quantity, setQuantity }) => {
-  const basketClick = () => {};
+const Navbar = ({ basketValue, quantity }) => {
   return (
-    <div>
-      <NavbarBs sticky="top" className="bg-white shadow-sm mb-3">
-        <Container>
-          <h2>My e-Book Library</h2>
+      <NavbarBs
+        style={{ height: "100%", width: "100%", position: "sticky" }}
+        className="bg-white shadow-sm mb-3"
+        expand="lg"
+      >
+        <Container  style={{ top: 0 }}>
+          <Link to="/" style={{color: "black",textDecoration: "none", paddingRight: "2vh"}}>
+            <h2>My e-Book Library</h2>
+          </Link>
           <Nav className="me-auto">
-            <Nav.Link to="/" as={NavLink}>
-              Home
-            </Nav.Link>
             <Nav.Link to="/about" as={NavLink}>
               About
             </Nav.Link>
-            <Nav.Link to="/bookcase" as={NavLink}>
+            <Nav.Link to="/" as={NavLink}>
               Bookcase
             </Nav.Link>
           </Nav>
           <Link to="/basket">
             <Button
-              // onClick={() => {
-              //   window.location.href = "/basket";
-              // }}
               className="rounded-circle d-flex justify-content-center align-items-center"
               style={{
                 width: "3rem",
@@ -40,8 +37,8 @@ const Navbar = ({ quantity, setQuantity }) => {
               <svg
                 version="1.0"
                 xmlns="http://www.w3.org/2000/svg"
-                width="5vh"
-                height="5vh"
+                width="3vh"
+                height="3vh"
                 viewBox="0 0 512.000000 512.000000"
                 preserveAspectRatio="xMidYMid meet"
               >
@@ -89,7 +86,6 @@ const Navbar = ({ quantity, setQuantity }) => {
           </Link>
         </Container>
       </NavbarBs>
-    </div>
   );
 };
 

@@ -1,13 +1,23 @@
 import React from "react";
 import BasketItem from "../components/Basket/BasketItem";
+import styled from "styled-components";
 
-const Basket = ({setQuantity, quantity, setBookBasket, bookBasket, books}) => {
+
+const Basket = ({basketValue, setBasketValue, setQuantity, quantity, setBookBasket, bookBasket, books}) => {
+  setBasketValue(bookBasket.map((item)=>item.saleInfo.retailPrice.amount).reduce((a, b) => a + b, 0).toFixed(2))
+
   return (
-    <div>
-      <h1>Your Shopping Cart</h1>
+    <BookBasket>
+      {bookBasket.length === 0 ? "Your basket is empty" : <p><strong>Total: </strong>{basketValue} GBP</p>}
+      
       <BasketItem books={books} bookBasket={bookBasket} setBookBasket={setBookBasket} quantity={quantity} setQuantity={setQuantity} />
-    </div>
+    </BookBasket>
   );
 };
+
+const BookBasket = styled.div`
+  margin: 0 10vh;
+`;
+
 
 export default Basket;

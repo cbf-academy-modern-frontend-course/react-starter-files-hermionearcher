@@ -1,33 +1,63 @@
 import React from "react";
 import styled from "styled-components";
-import { GrClose } from "react-icons/gr";
-import image from "../../models/error-book-cover.jpg";
+import { Button } from "react-bootstrap";
 
-const BasketItem = ({ setQuantity, quantity, setBookBasket, bookBasket, books }) => {
-  console.log("basket",bookBasket);
+const BasketItem = ({
+  setQuantity,
+  quantity,
+  setBookBasket,
+  bookBasket,
+  books,
+}) => {
   const removeFromCart = (id) => {
-    setBookBasket(bookBasket => bookBasket.filter(item => {
-      return item !== id
-    }))
+    const index = bookBasket.map((obj) => obj.id).indexOf(id);
+    let basket = [...bookBasket];
+    if (index !== -1) {
+      basket.splice(index, 1);
+      setBookBasket(basket);
+    }
     setQuantity(quantity - 1);
-    console.log(bookBasket)
   };
   return (
     <>
-      {bookBasket
-      .map((book, i) => (
+      {bookBasket.map((book, i) => (
         <>
           <Basket key={i}>
             <img src={book.volumeInfo.imageLinks.thumbnail} alt="book" />
-            <div>
-              <p>{book.volumeInfo.title}</p>
-              <p>{book.volumeInfo.author}</p>
-            </div>
+            <BasketInfo>
+              <p>
+                <strong>{book.volumeInfo.title}</strong>
+              </p>
+              {book.volumeInfo.authors && book.volumeInfo.authors.length > 1 ? (
+                <p>{book.volumeInfo.authors.join(" and ")}</p>
+              ) : (
+                <p>{book.volumeInfo.authors}</p>
+              )}
+              {console.log(book)}
+            </BasketInfo>
             <BasketQty>
-              <p>1</p>
+              <p>
+                <strong>QTY</strong> 1
+              </p>
             </BasketQty>
-            {/* <p>{book.saleInfo.retailPrice.amount !== undefined ? book.saleInfo.retailPrice.amount : null} <strong>{book.saleInfo.retailPrice.currencyCode}</strong></p> */}
-            <GrClose style={{cursor: "pointer"}} onClick={() => removeFromCart(book.id)}/>
+            <p style={{ width: "50%" }}>
+              {book.saleInfo.retailPrice.amount !== undefined
+                ? book.saleInfo.retailPrice.amount
+                : null}{" "}
+              <strong>{book.saleInfo.retailPrice.currencyCode}</strong>
+            </p>
+            <Button
+              style={{
+                cursor: "pointer",
+                marginLeft: "auto",
+                marginRight: "2vh",
+              }}
+              onClick={() => removeFromCart(book.id)}
+              variant="danger"
+              size="sm"
+            >
+              Remove
+            </Button>
           </Basket>
         </>
       ))}
@@ -38,26 +68,29 @@ const BasketItem = ({ setQuantity, quantity, setBookBasket, bookBasket, books })
 const Basket = styled.div`
   display: flex;
   flex-direction: row
-  margin: 0;
+  padding: 10vh;
   background-color: #f7f7f7;
   align-items: center;
   text-align: left;
   height: 100%;
+  gap: 20;
 
-//   @media (max-width: 700px) {
-//     flex-direction: column;
-//     width: 100%;
-//     align-items: center;
-//     text-align: center;
-//     padding-bottom: 5px;
-//   }
 `;
 
 const BasketQty = styled.div`
   display: flex;
   flex-direction: row
-  margin: 0;
+  margin-left: auto;
   align-items: center;
+  width: 50%;
+`;
+
+const BasketInfo = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding-left: 1vh;
+  margin: 0;
+  width: 100%;
 `;
 
 export default BasketItem;

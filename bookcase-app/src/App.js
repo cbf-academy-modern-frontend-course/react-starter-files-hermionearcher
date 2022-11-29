@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from "react";
 import BookList from "./components/Books/BookList";
-import Header from "./components/Header/Header";
 import data from "./models/books.json";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import About from "./Pages/About";
-import Home from "./Pages/Home";
 import axios from "axios";
 import Basket from "./Pages/Basket";
-import Navbar from "./components/Header/Navbar";
+import Navbar from "./components/Navbar/Navbar";
+import ScrollToTop from "./components/Scroll/ScrollToTop";
 
 const addTitle = (title) => {
   console.log(`The book '${title}' was clicked`);
@@ -18,9 +17,11 @@ function App() {
   const [books, setBooks] = useState(data);
   const [quantity, setQuantity] = useState(0);
   const [bookBasket, setBookBasket] = useState([]);
+  const [basketValue, setBasketValue] = useState(0);
 
   useEffect(() => {
     fetchData();
+    document.title = `Basket: ${quantity}`;
   }, [keyword]);
 
   const fetchData = () => {
@@ -53,16 +54,50 @@ function App() {
 
   return (
     <Router>
-      <Header quantity={quantity} setQuantity={setQuantity} keyword={keyword} setKeyword={setKeyword} />
+      <ScrollToTop />
+      <Navbar
+      basketValue={basketValue}
+        quantity={quantity}
+        setQuantity={setQuantity}
+        keyword={keyword}
+        setKeyword={setKeyword}
+      />
       <div>
         <Routes>
-          <Route exact path="/" element={<Home />} />
+          {/* <Route exact path="/" element={<Home />} /> */}
           <Route path="/about" element={<About />} />
           <Route
-            path="/bookcase"
-            element={<BookList bookBasket={bookBasket} setBookBasket={setBookBasket} books={books} addTitle={addTitle} quantity={quantity} setQuantity={setQuantity} />}
+            exact
+            path="/"
+            element={
+              <BookList
+                keyword={keyword}
+                setKeyword={setKeyword}
+                bookBasket={bookBasket}
+                setBookBasket={setBookBasket}
+                basketValue={basketValue}
+                setBasketValue={setBasketValue}
+                books={books}
+                addTitle={addTitle}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
+            }
           />
-          <Route path="/basket" element={<Basket books={books} bookBasket={bookBasket} setBookBasket={setBookBasket} quantity={quantity} setQuantity={setQuantity} />} />
+          <Route
+            path="/basket"
+            element={
+              <Basket
+                books={books}
+                bookBasket={bookBasket}
+                basketValue={basketValue}
+                setBasketValue={setBasketValue}
+                setBookBasket={setBookBasket}
+                quantity={quantity}
+                setQuantity={setQuantity}
+              />
+            }
+          />
         </Routes>
       </div>
     </Router>
