@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import Book from "./Book";
 import { useLocation } from "react-router-dom";
@@ -20,6 +20,7 @@ const BookList = ({
 }) => {
   const location = useLocation();
   let currentUrl = location.pathname;
+
   return (
     <>
       {(currentUrl === "/" || currentUrl === "/bookcase") && (

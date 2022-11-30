@@ -1,7 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import errorImg from "../../models/error-book-cover.jpg";
 import { Button } from "react-bootstrap";
+import ScrollToTop from "../Scroll/ScrollToTop";
 
 function Book({
   bookBasket,
@@ -28,19 +30,22 @@ function Book({
     setBookBasket((bookBasket) => [...bookBasket, book]);
   };
   const {
-    volumeInfo: { title, authors, description, imageLinks },
+    volumeInfo: { title, authors, description, imageLinks, previewLink },
     saleInfo: { retailPrice },
   } = book;
   return (
     <>
       <BookItem component={"div"} key={book.id}>
+        <a href={previewLink} target="_blank">
+
         <BookCover component={"div"}>
           <img
             className="book-img"
             alt={`${title} book cover`}
             src={imageLinks ? imageLinks.thumbnail : errorImg}
-          />
+            />
         </BookCover>
+            </a>
         <BookText component={"div"}>
           <h2>{title}</h2>
           {authors && authors.length > 1 ? (
@@ -71,6 +76,7 @@ function Book({
           </Button>
         ) : null}
       </BookItem>
+      <ScrollToTop />
     </>
   );
 }

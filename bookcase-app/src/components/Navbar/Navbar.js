@@ -12,14 +12,14 @@ const Navbar = ({ basketValue, quantity }) => {
       >
         <Container  style={{ top: 0 }}>
           <Link to="/" style={{color: "black",textDecoration: "none", paddingRight: "2vh"}}>
-            <h2>My e-Book Library</h2>
+            <h2>Book store</h2>
           </Link>
-          <Nav className="me-auto">
+          <Nav className="me-auto navLinkWrapper">
             <Nav.Link to="/about" as={NavLink}>
               About
             </Nav.Link>
             <Nav.Link to="/" as={NavLink}>
-              Bookcase
+              Library
             </Nav.Link>
           </Nav>
           <Link to="/basket">

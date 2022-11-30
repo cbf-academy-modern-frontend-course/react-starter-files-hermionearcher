@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import { Button } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
 
 const BasketItem = ({
   setQuantity,
@@ -18,6 +19,7 @@ const BasketItem = ({
     }
     setQuantity(quantity - 1);
   };
+
   return (
     <>
       {bookBasket.map((book, i) => (

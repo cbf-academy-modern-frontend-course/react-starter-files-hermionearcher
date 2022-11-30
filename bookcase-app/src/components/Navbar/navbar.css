@@ -1,0 +1,6 @@
+.navLinkWrapper {
+    display: flex;
+    border: solid red 1px;
+    width: 100%;
+    flex-direction: row;
+}
