@@ -11,7 +11,7 @@ const BasketItem = ({
   books,
 }) => {
   const removeFromCart = (id) => {
-    const index = bookBasket.map((obj) => obj.id).indexOf(id);
+    const index = bookBasket.map((obj, i) => obj.id).indexOf(id);
     let basket = [...bookBasket];
     if (index !== -1) {
       basket.splice(index, 1);
@@ -35,7 +35,6 @@ const BasketItem = ({
               ) : (
                 <p>{book.volumeInfo.authors}</p>
               )}
-              {console.log(book)}
             </BasketInfo>
             <BasketQty>
               <p>
@@ -43,10 +42,13 @@ const BasketItem = ({
               </p>
             </BasketQty>
             <p style={{ width: "50%" }}>
-              {book.saleInfo.retailPrice.amount !== undefined
+            {/* src={imageLinks ? imageLinks.thumbnail : errorImg} */}
+
+
+              {book.saleInfo.retailPrice
                 ? book.saleInfo.retailPrice.amount
-                : null}{" "}
-              <strong>{book.saleInfo.retailPrice.currencyCode}</strong>
+                : book.saleInfo.saleability}{" "}
+              <strong>{book.saleInfo.retailPrice ? book.saleInfo.retailPrice.currencyCode : null}</strong>
             </p>
             <Button
               style={{

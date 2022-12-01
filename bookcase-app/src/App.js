@@ -6,9 +6,6 @@ import About from "./Pages/About";
 import axios from "axios";
 import Basket from "./Pages/Basket";
 import Navbar from "./components/Navbar/Navbar";
-import { useLocation } from "react-router-dom";
-import bookImg from './images/shopping-cart.png'
-import basketImg from './images/favicon.png'
 
 const addTitle = (title) => {
   console.log(`The book '${title}' was clicked`);
@@ -20,17 +17,15 @@ function App() {
   const [quantity, setQuantity] = useState(0);
   const [bookBasket, setBookBasket] = useState([]);
   const [basketValue, setBasketValue] = useState(0);
-  const [currentUrl, setCurrentUrl] = useState('/');
 
   useEffect(() => {
     fetchData();
   }, [keyword]);
 
-  useEffect(() => {
-    document.title = `Basket: ${quantity}`;
-  }, [quantity]);
+  // useEffect(() => {
+  //   document.title = `Basket: ${quantity}`;
+  // }, [quantity]);
   
-
 
   const fetchData = () => {
     if (keyword === "") {

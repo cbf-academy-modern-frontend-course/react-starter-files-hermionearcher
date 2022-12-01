@@ -1,17 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import errorImg from "../../models/error-book-cover.jpg";
 import { Button } from "react-bootstrap";
 import ScrollToTop from "../Scroll/ScrollToTop";
 
-function Book({
-  bookBasket,
-  setBookBasket,
-  book,
-  quantity,
-  setQuantity,
-}) {
+function Book({ bookBasket, setBookBasket, book, quantity, setQuantity }) {
   const truncate = (input) =>
     input?.length > 252 ? `${input.substring(0, 250)}...` : input;
 
@@ -36,16 +29,15 @@ function Book({
   return (
     <>
       <BookItem component={"div"} key={book.id}>
-        <a href={previewLink} target="_blank">
-
-        <BookCover component={"div"}>
-          <img
-            className="book-img"
-            alt={`${title} book cover`}
-            src={imageLinks ? imageLinks.thumbnail : errorImg}
+        <a href={previewLink} target="_blank" rel="noreferrer">
+          <BookCover component={"div"}>
+            <img
+              className="book-img"
+              alt={`${title} book cover`}
+              src={imageLinks ? imageLinks.thumbnail : errorImg}
             />
-        </BookCover>
-            </a>
+          </BookCover>
+        </a>
         <BookText component={"div"}>
           <h2>{title}</h2>
           {authors && authors.length > 1 ? (
@@ -61,8 +53,7 @@ function Book({
           )}
           <p>{truncate(description)}</p>
         </BookText>
-
-        {!bookBasket.includes(book) ? (
+        {!bookBasket.includes(book) && retailPrice ? (
           <Button onClick={() => addToCart()} size="sm">
             Add+
           </Button>
@@ -74,7 +65,11 @@ function Book({
           >
             Remove
           </Button>
-        ) : null}
+        ) : (
+          <Button size="sm" disabled>
+            Not for sale
+          </Button>
+        )}
       </BookItem>
       <ScrollToTop />
     </>
@@ -102,6 +97,7 @@ const BookItem = styled.div`
 `;
 const BookCover = styled.div`
   align-self: center;
+
   @media (max-width: 700px) {
     justify-content: flex-start;
     top: 0;
@@ -111,6 +107,7 @@ const BookText = styled.div`
   display: flex;
   flex-direction: column;
   gap: 0;
+
   width: 100%;
   &:not(:last-child) {
     display: block;
